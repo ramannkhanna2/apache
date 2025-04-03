@@ -1,0 +1,29 @@
+---
+- name: Install and Start Apache 
+  hosts: all  # Targets all hosts in inventory
+
+  tasks:
+    # Update apt package cache (recommended before installing)
+    - name: Update apt package cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    # Install Apache (apache2 package on Ubuntu/Debian)
+    - name: Install Apache2
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+
+    # Ensure Apache is running and enabled on boot
+    - name: Start and enable Apache service
+      ansible.builtin.service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    # Create a basic index.html
+    - name: Add simple index.html
+      ansible.builtin.copy:
+        content: "Hello from {{ ansible_hostname }}!"
+        dest: /var/www/html/index.html
+        mode: 0644
