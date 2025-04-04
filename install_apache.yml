@@ -1,6 +1,7 @@
 ---
 - name: Install and Start Apache 
-  hosts: all  # Targets all hosts in inventory
+  hosts: all
+  become: true  # Make sure to run with elevated privileges
 
   tasks:
     # Update apt package cache (recommended before installing)
@@ -14,6 +15,11 @@
         name: apache2
         state: present
 
+    # Ensure systemd is reloaded after installing new service
+    - name: Reload systemd to pick up Apache service
+      ansible.builtin.systemd:
+        daemon_reload: yes
+
     # Ensure Apache is running and enabled on boot
     - name: Start and enable Apache service
       ansible.builtin.service:
@@ -26,4 +32,4 @@
       ansible.builtin.copy:
         content: "Hello from {{ ansible_hostname }}!"
         dest: /var/www/html/index.html
-        mode: 0644
+        mode: '0644'
