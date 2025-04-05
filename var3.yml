@@ -14,8 +14,8 @@
       template:
         src: index.html
         dest: /var/www/html/index.html
+      notify: Restart service
       ignore_errors: true
-      notify: Restart {{ pkg }} service
       
 
     - name: Show assigned role
@@ -23,7 +23,7 @@
         msg: "Host {{ inventory_hostname }} has role: {{ role }} and is located in {{ location }} (env: {{ env }})"
 
   handlers:
-    - name: Restart {{ pkg }} service
+    - name: Restart service
       service:
         name: "{{ pkg }}"
         state: restarted
