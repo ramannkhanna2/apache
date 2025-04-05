@@ -17,9 +17,9 @@
       notify: Restart {{ pkg }} service
       ignore_errors: true
 
-    - name: username
-      command:
-        cmd: "whoami"
+    - name: Show assigned role
+      debug:
+        msg: "Host {{ inventory_hostname }} has role: {{ role }} and is located in {{ location }} (env: {{ env }})"
 
   handlers:
     - name: Restart {{ pkg }} service
