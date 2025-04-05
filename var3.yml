@@ -1,0 +1,28 @@
+- hosts: all
+  remote_user: root
+  become: yes
+  become_method: sudo
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Update apt package index
+      apt:
+        update_cache: yes
+
+    - name: Install apache2 package
+      package:
+        name: "{{ httpd_package }}"
+        state: present
+
+    - name: Configure hostname and IP in webpage
+      template:
+        src: index.html
+        dest: /var/www/html/index.html
+      notify: Restart apache2 service
+
+  handlers:
+    - name: Restart apache2 service
+      service:
+        name: apache2
+        state: restarted
