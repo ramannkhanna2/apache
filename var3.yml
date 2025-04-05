@@ -17,9 +17,12 @@
       notify: Restart {{ pkg }} service
       ignore_errors: true
 
+    - name: username
+      command:
+        cmd: "whoami"
+
   handlers:
     - name: Restart {{ pkg }} service
       service:
         name: "{{ pkg }}"
         state: restarted
-      ignore_errors: true
