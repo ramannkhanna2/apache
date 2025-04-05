@@ -2,10 +2,7 @@
 m1 ansible_host=177.71.159.199
 
 [web:vars]
-web_content: |
-  <h1>This is a demo for Apache Webserver!</h1>
-  <p>Hostname: {{ ansible_hostname }}</p>
-  <p>IP Address: {{ ansible_default_ipv4.address }}</p>
+web_content=<h1>This is a demo</h1><p>Host: {{ ansible_hostname }}</p>
 
 
 [db]
