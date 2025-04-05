@@ -1,7 +1,4 @@
 - hosts: web
-  vars_files:
-  - vars.yml
-
   tasks:
     - name: Update apt package index
       apt:
