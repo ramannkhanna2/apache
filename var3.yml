@@ -7,19 +7,19 @@
       apt:
         update_cache: yes
 
-    - name: Install apache2 package
+    - name: Install {{ package }} package
       package:
-        name: "{{ httpd_package }}"
+        name: "{{ package }}"
         state: present
 
     - name: Configure hostname and IP in webpage
       template:
         src: index.html
         dest: /var/www/html/index.html
-      notify: Restart apache2 service
+      notify: Restart {{ package }} service
 
   handlers:
-    - name: Restart apache2 service
+    - name: Restart {{ package }} service
       service:
-        name: apache2
+        name: "{{ package }}"
         state: restarted
