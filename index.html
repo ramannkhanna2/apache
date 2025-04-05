@@ -1,3 +1,10 @@
-<h1>This is {{ role }} deployed in {{ location }}</h1>
-<p>Hostname: {{ ansible_hostname }}</p>
-<p>IP Address: {{ ansible_default_ipv4.address }}</p>
+<html>
+  <head><title>Demo Page</title></head>
+  <body>
+    <h1>This is a demo</h1>
+    <p>Host: {{ ansible_hostname }}</p>
+    <p>Role: {{ role }}</p>
+    <p>Location: {{ location }}</p>
+    <p>Environment: {{ env }}</p>
+  </body>
+</html>
