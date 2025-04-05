@@ -14,8 +14,9 @@
       template:
         src: index.html
         dest: /var/www/html/index.html
-      notify: Restart {{ pkg }} service
       ignore_errors: true
+      notify: Restart {{ pkg }} service
+      
 
     - name: Show assigned role
       debug:
