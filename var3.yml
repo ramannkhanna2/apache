@@ -3,12 +3,14 @@
     - name: Update apt package index
       apt:
         update_cache: yes
+      when: ansible_os_family == "Debian"
+      ignore_errors: true
 
     - name: Install {{ pkg }} package
       package:
         name: "{{ pkg }}"
         state: present
-      ignore_errors: true  
+      ignore_errors: true
 
     - name: Configure hostname and IP in webpage
       template:
@@ -16,7 +18,6 @@
         dest: /var/www/html/index.html
       notify: Restart service
       ignore_errors: true
-      
 
     - name: Show assigned role
       debug:
