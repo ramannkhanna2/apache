@@ -8,15 +8,18 @@
       package:
         name: "{{ pkg }}"
         state: present
+      ignore_errors: true  
 
     - name: Configure hostname and IP in webpage
       template:
         src: index.html
         dest: /var/www/html/index.html
       notify: Restart {{ pkg }} service
+      ignore_errors: true
 
   handlers:
     - name: Restart {{ pkg }} service
       service:
         name: "{{ pkg }}"
         state: restarted
+      ignore_errors: true
