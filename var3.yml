@@ -7,19 +7,19 @@
       apt:
         update_cache: yes
 
-    - name: Install {{ package }} package
+    - name: Install {{ pkg }} package
       package:
-        name: "{{ package }}"
+        name: "{{ pkg }}"
         state: present
 
     - name: Configure hostname and IP in webpage
       template:
         src: index.html
         dest: /var/www/html/index.html
-      notify: Restart {{ package }} service
+      notify: Restart {{ pkg }} service
 
   handlers:
-    - name: Restart {{ package }} service
+    - name: Restart {{ pkg }} service
       service:
-        name: "{{ package }}"
+        name: "{{ pkg }}"
         state: restarted
