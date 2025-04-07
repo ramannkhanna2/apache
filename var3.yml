@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: role_web
   tasks:
     - name: Update apt package index
       apt:
