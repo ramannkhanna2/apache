@@ -11,13 +11,6 @@
       failed_when: boto3_output.rc != 0
     - debug:
         msg: "boto3 version: {{ boto3_output.stdout }}"
-
-    - name: Use community.general collection to fetch date
-      community.general.date:
-        format: "%Y-%m-%d %H:%M:%S"
-      register: date_result
-    - debug:
-        msg: "Current datetime (community.general): {{ date_result.date }}"
     
 
     - name: Check jq installation
